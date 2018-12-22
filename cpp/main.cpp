@@ -138,8 +138,7 @@ auto regexs = {
     std::make_pair(std::regex(R"(std::strcat\((.+?),\s*(.+?)\))"), "(($1).($2))"),
 };
 
-int main(int argc, const char * argv[]) {
-    
+float iteration(){
     std::fstream stream("../../test_source.cpp", std::ios::in);
     if (stream.is_open() == false)
         return 1;
@@ -152,8 +151,18 @@ int main(int argc, const char * argv[]) {
     }
     
     auto elapsed = std::chrono::duration_cast<std::chrono::microseconds>(std::chrono::system_clock::now()-__start__).count();
-    std::cout << "time: " << static_cast<float>(elapsed) / 1000000 << "s" << std::endl;
+    return static_cast<float>(elapsed) / 1000000;
+}
+
+int main(int argc, const char * argv[]) {
     
+    std::cout << "1 iteration: " << iteration() << "s" << std::endl;
+    float avr = 0.f;
+    for(int i=0; i<10; ++i){
+        avr += iteration();
+    }
+    avr /= 10.f;
+    std::cout << "10 iteration: " << avr << "s" << std::endl;
     
     return 0;
 }

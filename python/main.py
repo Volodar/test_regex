@@ -127,15 +127,25 @@ regexs = (
 )
 
 
-def main():
-    start = time()
-
+def iteration():
     text = open('../test_source.cpp').read()
+    start = time()
     for pair in regexs:
         text = pair[0].sub(pair[1], text)
-
     elapsed = time() - start
-    print '%fs' % elapsed
+    return elapsed
+
+
+def main():
+    print '1 iteration: %fs' % iteration()
+
+    avr = 0.0
+    count = 10
+    while count:
+        avr += iteration()
+        count -= 1
+    avr /= 10
+    print '10 iteration: %fs' % avr
 
 
 if __name__ == '__main__':
