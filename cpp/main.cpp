@@ -1,16 +1,9 @@
-//
-//  main.cpp
-//  TestRegex
-//
-//  Created by Владимир Толмачев on 20/12/2018.
-//  Copyright © 2018 Владимир Толмачев. All rights reserved.
-//
-
 #include <iostream>
 #include <fstream>
 #include <regex>
 #include <algorithm>
 #include <numeric>
+#include <chrono>
 
 auto regexs = {
     std::make_pair(std::regex(R"(DataStorage::shared\(\).get<(\w+)>)"), "DataStorage::shared().get$1"),
